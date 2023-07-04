@@ -38,9 +38,9 @@ class ArreraDoc :
         #Creation des cadre
         self.mainCadre = Frame(self.screen,bg=color,width=650,height=450)
         self.settingCadre = Frame(self.screen,bg=color,width=650,height=450)
-        self.addCadre = Frame(self.screen,bg="red",width=650,height=450)
-        self.onlineAddCadre = Frame(self.screen,bg="red",width=650,height=450)
-        self.localAddCadre = Frame(self.screen,bg="red",width=650,height=450)
+        self.addCadre = Frame(self.screen,bg=color,width=650,height=450)
+        self.onlineAddCadre = Frame(self.screen,bg=color,width=650,height=450)
+        self.localAddCadre = Frame(self.screen,bg=color,width=650,height=450)
         #Widget mainCadre
         self.btnDoc1 = Button(self.mainCadre,width="4",height="2",bg=color)
         self.btnDoc2 = Button(self.mainCadre,width="4",height="2",bg=color)
@@ -60,8 +60,21 @@ class ArreraDoc :
         self.menuColor = OptionMenu(self.settingCadre,self.varColor,*self.listeColor)
         self.menuApp = OptionMenu(self.settingCadre,self.varNbApp,*self.listNb)
         self.btnValider = Button(self.settingCadre,text="Valider",font=("arial","15"),width="25",bg="green",fg="white",command=self.ecriturePara)
-        self.btnAdd = Button(self.settingCadre,text="Ajouter une documentation",font=("arial","15"),width="25",bg=color,fg=textColor)
-        #Affichage 
+        self.btnAdd = Button(self.settingCadre,text="Ajouter une documentation",font=("arial","15"),width="25",bg=color,fg=textColor,command=self.addPage)
+        #widget addCadre
+        self.btnOnline = Button(self.addCadre,text="En ligne",bg=color,fg=textColor,font=("arial","15"),command=self.onlineAdd)
+        self.btnLocal = Button(self.addCadre,text="Local",bg=color,fg=textColor,font=("arial","15"),command=self.localAdd)
+        #widget onlineAddCadre
+        self.btnIMG1 = Button(self.onlineAddCadre,text="Choisir Icon",font=("arial","15"),width="25",bg=color,fg=textColor)
+        self.entryName1 = Entry(self.onlineAddCadre,width=20,highlightthickness=2, highlightbackground="black",font=("arial","20"))
+        self.entryLien = Entry(self.onlineAddCadre,width=42,highlightthickness=2, highlightbackground="black",font=("arial","20"))
+        self.btnValiderOnline = Button(self.onlineAddCadre,text="Valider",font=("arial","15"),width="25",bg="green",fg="white")
+        #widget localAddCadre
+        self.btnIMG2 = Button(self.localAddCadre,text="Choisir Icon",font=("arial","15"),width="25",bg=color,fg=textColor)
+        self.entryName2 = Entry(self.localAddCadre,width=20,highlightthickness=2, highlightbackground="black",font=("arial","20"))
+        self.btnFichier = Button(self.localAddCadre,text="Fichier",font=("arial","15"),width="25",bg=color,fg=textColor)
+        self.btnValiderLocal = Button(self.localAddCadre,text="Valider",font=("arial","15"),width="25",bg="green",fg="white")
+        #Affichage  
         self.mainAffichage(0)
         #Ajout de menu a la fenetre
         self.screen.config(menu=self.topMenu)
@@ -170,9 +183,15 @@ class ArreraDoc :
             textColor = "white"
         else :
             textColor="black"
+            
         self.screen.configure(bg=color)
+        
         self.mainCadre.configure(bg=color)
         self.settingCadre.configure(bg=color)
+        self.addCadre.configure(bg=color)
+        self.onlineAddCadre.configure(bg=color)
+        self.localAddCadre.configure(bg=color)
+        
         self.btnDoc1.configure(bg=color,fg=textColor)
         self.btnDoc2.configure(bg=color,fg=textColor)
         self.btnDoc3.configure(bg=color,fg=textColor)
@@ -188,7 +207,12 @@ class ArreraDoc :
         self.labelIndication1.configure(bg=color,fg=textColor)
         self.labelIndication2.configure(bg=color,fg=textColor)
         self.btnAdd.configure(bg=color,fg=textColor)
-        
+        self.btnOnline.configure(bg=color,fg=textColor)
+        self.btnLocal.configure(bg=color,fg=textColor)
+        self.btnIMG1.configure(bg=color,fg=textColor)
+        self.btnIMG2.configure(bg=color,fg=textColor)
+        self.btnFichier.configure(bg=color,fg=textColor)
+        #Mise a jour de la fenetre
         self.screen.update()
         self.btnDoc1.place_forget()
         self.btnDoc2.place_forget()
@@ -203,7 +227,47 @@ class ArreraDoc :
         self.btnDoc11.place_forget()
         self.btnDoc12.place_forget()
         self.mainAffichage(1)
-        
-        
+    
+    def addPage(self):
+        self.settingCadre.place_forget()
+        self.addCadre.place(relx=0.5, rely=0.5, anchor=CENTER)
+        self.btnOnline.place(x="50",y="194")
+        self.btnLocal.place(x="547",y="194")
+    
+    def textEntryLien(self,event):
+        if self.entryLien.get() == "Entrer le lien de la documentation":
+            self.entryLien.delete(0, END)
+    
+    def textEntryName1(self,event):
+        if self.entryName1.get() == "Entrez le nom de la doc":
+            self.entryName1.delete(0, END)
+            self.entryName1.config(foreground="black")
+    
+    def onlineAdd(self):
+        self.addCadre.place_forget()
+        self.onlineAddCadre.place(relx=0.5, rely=0.5, anchor=CENTER)
+        self.btnIMG1.place(x="0",y="0")
+        self.entryName1.place(x="300",y="0")
+        self.entryLien.place(x="5",y="75")
+        self.btnValiderOnline.place(x="200",y="150")
+        self.entryLien.insert(0,"Entrer le lien de la documentation")
+        self.entryName1.insert(0,"Entrez le nom de la doc")
+        self.entryLien.bind("<FocusIn>",self.textEntryLien)
+        self.entryName1.bind("<FocusIn>",self.textEntryName1)
+    
+    def textEntryName2(self,event):
+        if self.entryName2.get() == "Entrez le nom de la doc":
+            self.entryName2.delete(0, END)
+            self.entryName2.config(foreground="black")
+    
+    def localAdd(self):
+        self.addCadre.place_forget()
+        self.localAddCadre.place(relx=0.5, rely=0.5, anchor=CENTER)
+        self.btnIMG2.place(x="0",y="0")
+        self.entryName2.place(x="300",y="0")
+        self.btnFichier.place(x="200",y="100")
+        self.btnValiderLocal.place(x="200",y="200")
+        self.entryName2.insert(0,"Entrez le nom de la doc")
+        self.entryName2.bind("<FocusIn>",self.textEntryName2)
         
 ArreraDoc()
