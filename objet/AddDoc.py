@@ -32,6 +32,7 @@ class AddDoc :
             dictSortie[str(i)] = self.etatBTN.lectureJSON(str(i))
         
         return dictSortie
+
     
     def modifEtatBTN(self,nbBTN:str,etat:bool):
         if etat == True:
@@ -117,3 +118,12 @@ class AddDoc :
             return True
         else :
             return False
+        
+        
+    def recuperationType(self,nbBTN):
+        var = jsonWork("racourcie/configBTN/btnDoc"+str(nbBTN)+"json").lectureJSON("type")
+        return  var
+    
+    def recuperationType(self,nbBTN):
+        return jsonWork("racourcie/configBTN/btnDoc"+str(nbBTN)+"json").lectureJSON("lien")
+    
