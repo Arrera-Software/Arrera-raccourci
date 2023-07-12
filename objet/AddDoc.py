@@ -120,10 +120,8 @@ class AddDoc :
             return False
         
         
-    def recuperationType(self,nbBTN):
-        var = jsonWork("racourcie/configBTN/btnDoc"+str(nbBTN)+"json").lectureJSON("type")
+    def recuperationType(self,nbBTN : str):
+        var = jsonWork("racourcie/configBTN/btnDoc"+str(nbBTN)+".json").lectureJSON("type")
         return  var
     
-    def recuperationLien(self,nbBTN):
-        return jsonWork("racourcie/configBTN/btnDoc"+str(nbBTN)+"json").lectureJSON("lien")
     
