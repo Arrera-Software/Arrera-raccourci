@@ -1,6 +1,5 @@
 import webbrowser
-import subprocess
-import sys
+from objet.openPDF import*
 from objet.ObjetJSON import *
 
 class CommandWeb :
@@ -13,18 +12,10 @@ class CommandWeb :
         
 class CommandFile : 
     def __init__(self,nb : str) :
-        self.file = str("racourcie/fichier/doc"+nb+".pdf")
+        self.pdf = openPDF("racourcie/fichier/doc"+nb+".pdf")
     
     def open(self):
-        if sys.platform == "win32":
-            # Sur Windows
-            subprocess.Popen(["start", self.file], shell=True)
-        elif sys.platform == "darwin":
-            # Sur macOS
-            subprocess.Popen(["open", self.file])
-        else:
-            # Sur Linux et autres systèmes Unix
-            subprocess.Popen(["xdg-open", self.file])
+       self.pdf.open()
     
    
         
