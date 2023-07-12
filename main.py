@@ -1,8 +1,8 @@
 from tkinter import*
-from tkinter.filedialog import askopenfilename
 from PIL import Image, ImageTk
 from objet.ObjetJSON import *
 from objet.AddDoc import *
+import webbrowser
 
 nameApp = "Arrera Documentation"
 versionApp = "I2023-1.00.dev07/2023"
@@ -44,18 +44,20 @@ class ArreraDoc :
         self.addCadre = Frame(self.screen,bg=color,width=650,height=450)
         self.supprCadre = Frame(self.screen,bg=color,width=650,height=450)
         #Widget mainCadre
-        self.btnDoc1 = Button(self.mainCadre,width="4",height="2",bg=color)
-        self.btnDoc2 = Button(self.mainCadre,width="4",height="2",bg=color)
-        self.btnDoc3 = Button(self.mainCadre,width="4",height="2",bg=color)
-        self.btnDoc4 = Button(self.mainCadre,width="4",height="2",bg=color)
-        self.btnDoc5 = Button(self.mainCadre,width="4",height="2",bg=color)
-        self.btnDoc6 = Button(self.mainCadre,width="4",height="2",bg=color)
-        self.btnDoc7 = Button(self.mainCadre,width="4",height="2",bg=color)
-        self.btnDoc8 = Button(self.mainCadre,width="4",height="2",bg=color)
-        self.btnDoc9 = Button(self.mainCadre,width="4",height="2",bg=color)
-        self.btnDoc10 = Button(self.mainCadre,width="4",height="2",bg=color)
-        self.btnDoc11 = Button(self.mainCadre,width="4",height="2",bg=color)
-        self.btnDoc12 = Button(self.mainCadre,width="4",height="2",bg=color)
+        self.btnDoc = [
+            Button(self.mainCadre,width="4",height="2",bg=color),
+            Button(self.mainCadre,width="4",height="2",bg=color),
+            Button(self.mainCadre,width="4",height="2",bg=color),
+            Button(self.mainCadre,width="4",height="2",bg=color),
+            Button(self.mainCadre,width="4",height="2",bg=color),
+            Button(self.mainCadre,width="4",height="2",bg=color),
+            Button(self.mainCadre,width="4",height="2",bg=color),
+            Button(self.mainCadre,width="4",height="2",bg=color),
+            Button(self.mainCadre,width="4",height="2",bg=color),
+            Button(self.mainCadre,width="4",height="2",bg=color),
+            Button(self.mainCadre,width="4",height="2",bg=color),
+            Button(self.mainCadre,width="4",height="2",bg=color)
+        ]#Liste de bouton pour simplifier la gestion
         #widget settingCadre
         self.labelIndication1 = Label(self.settingCadre,text="Nombre de documentation afficher :",bg=color,font=("arial","20"),fg=textColor)
         self.labelIndication2 = Label(self.settingCadre,text="Theme application :",bg=color,font=("arial","20"),fg=textColor)
@@ -106,39 +108,40 @@ class ArreraDoc :
     def mainAffichage(self,nb):
         self.settingCadre.place_forget()
         self.addCadre.place_forget()
+        self.supprCadre.place_forget()
         self.mainCadre.place(relx=0.5, rely=0.5, anchor=CENTER)
         nbRacoucie=int(self.configuration.lectureJSON("nbRacoucie"))
         if nbRacoucie !=12 and nbRacoucie !=4 and nbRacoucie !=8:
             self.configuration.EcritureJSON("nbRacoucie","4")
         if nbRacoucie == 12 :
-            self.btnDoc1.place(x=35,y=35)
-            self.btnDoc2.place(x=185,y=35)
-            self.btnDoc3.place(x=427,y=35)
-            self.btnDoc4.place(x=577,y=35)
-            self.btnDoc5.place(x=35,y=194)
-            self.btnDoc6.place(x=185,y=194)
-            self.btnDoc7.place(x=427,y=194)
-            self.btnDoc8.place(x=577,y=194)
-            self.btnDoc9.place(x=35,y=368)
-            self.btnDoc10.place(x=185,y=368)
-            self.btnDoc11.place(x=427,y=368)
-            self.btnDoc12.place(x=577,y=368)
+            self.btnDoc[8].place(x=35,y=35)
+            self.btnDoc[9].place(x=577,y=35)
+            self.btnDoc[4].place(x=185,y=35)
+            self.btnDoc[5].place(x=427,y=35)
+            self.btnDoc[0].place(x=35,y=194)
+            self.btnDoc[1].place(x=185,y=194)
+            self.btnDoc[2].place(x=427,y=194)
+            self.btnDoc[3].place(x=577,y=194)
+            self.btnDoc[6].place(x=185,y=368)
+            self.btnDoc[7].place(x=427,y=368)
+            self.btnDoc[10].place(x=35,y=368)
+            self.btnDoc[11].place(x=577,y=368)
         else :
             if nbRacoucie == 8 :
-                self.btnDoc5.place(x=185,y=35)
-                self.btnDoc6.place(x=427,y=35)
-                self.btnDoc1.place(x=35,y=194)
-                self.btnDoc2.place(x=185,y=194)
-                self.btnDoc3.place(x=427,y=194)
-                self.btnDoc4.place(x=577,y=194)
-                self.btnDoc7.place(x=185,y=368)
-                self.btnDoc8.place(x=427,y=368)
+                self.btnDoc[4].place(x=185,y=35)
+                self.btnDoc[5].place(x=427,y=35)
+                self.btnDoc[0].place(x=35,y=194)
+                self.btnDoc[1].place(x=185,y=194)
+                self.btnDoc[2].place(x=427,y=194)
+                self.btnDoc[3].place(x=577,y=194)
+                self.btnDoc[6].place(x=185,y=368)
+                self.btnDoc[7].place(x=427,y=368)
             else :
                 if nbRacoucie == 4:
-                    self.btnDoc1.place(x=35,y=194)
-                    self.btnDoc2.place(x=185,y=194)
-                    self.btnDoc3.place(x=427,y=194)
-                    self.btnDoc4.place(x=577,y=194)
+                    self.btnDoc[0].place(x=35,y=194)
+                    self.btnDoc[1].place(x=185,y=194)
+                    self.btnDoc[2].place(x=427,y=194)
+                    self.btnDoc[3].place(x=577,y=194)
         if nb == 1 :
             self.topMenu.entryconfigure("Accueil",label="Parametre",command=self.setting)
 
@@ -168,6 +171,7 @@ class ArreraDoc :
         self.btnValider.place(x="200",y="135")
         self.btnAdd.place(x="200",y="195")
         self.btnSuppr.place(x="200",y="255")
+    
     def ecriturePara(self):
         nb=str(self.varNbApp.get())
         color = str(self.varColor.get())
@@ -184,39 +188,20 @@ class ArreraDoc :
         self.settingCadre.configure(bg=color)
         self.addCadre.configure(bg=color)
         #Gestion de la couleur des bouton
-        self.btnDoc1.configure(bg=color,fg=textColor)
-        self.btnDoc2.configure(bg=color,fg=textColor)
-        self.btnDoc3.configure(bg=color,fg=textColor)
-        self.btnDoc4.configure(bg=color,fg=textColor)
-        self.btnDoc5.configure(bg=color,fg=textColor)
-        self.btnDoc6.configure(bg=color,fg=textColor)
-        self.btnDoc7.configure(bg=color,fg=textColor)
-        self.btnDoc8.configure(bg=color,fg=textColor)
-        self.btnDoc9.configure(bg=color,fg=textColor)
-        self.btnDoc10.configure(bg=color,fg=textColor)
-        self.btnDoc11.configure(bg=color,fg=textColor)
-        self.btnDoc12.configure(bg=color,fg=textColor)
+        for i in [0,1,2,3,4,5,6,7,8,9,10,11] :
+            self.btnDoc[i].configure(bg=color,fg=textColor)
         self.btnAdd.configure(bg=color,fg=textColor)
         self.btnOnline.configure(bg=color,fg=textColor)
         self.btnLocal.configure(bg=color,fg=textColor)
+        self.btnSuppr.configure(bg=color,fg=textColor)
         #gestion des label
         self.labelIndication1.configure(bg=color,fg=textColor)
         self.labelIndication2.configure(bg=color,fg=textColor)
        
         #Mise a jour de la fenetre
         self.screen.update()
-        self.btnDoc1.place_forget()
-        self.btnDoc2.place_forget()
-        self.btnDoc3.place_forget()
-        self.btnDoc4.place_forget()
-        self.btnDoc5.place_forget()
-        self.btnDoc6.place_forget()
-        self.btnDoc7.place_forget()
-        self.btnDoc8.place_forget()
-        self.btnDoc9.place_forget()
-        self.btnDoc10.place_forget()
-        self.btnDoc11.place_forget()
-        self.btnDoc12.place_forget()
+        for i in [0,1,2,3,4,5,6,7,8,9,10,11] :
+            self.btnDoc[i].place_forget()
         self.mainAffichage(1)
     
     def addPage(self):
@@ -271,5 +256,5 @@ class ArreraDoc :
             self.listeBTN.place(x="440",y="15")
             self.btnValSuppr.configure(command=suppr)
             self.btnValSuppr.place(x="200",y="135")
-        
+   
 ArreraDoc()
