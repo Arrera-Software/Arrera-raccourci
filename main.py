@@ -263,8 +263,10 @@ class ArreraDoc :
             if etatBTN[i] == "0":
                 nbBTN = str(i)
                 break
-        self.gestionBTN.AjoutBTN(nbBTN,"web")           
-    
+        self.mainAffichage(1)          
+        self.gestionBTN.AjoutBTN(nbBTN,"web")
+        
+        
     def localAdd(self):#Fonction pour les doc local
         etatBTN = self.gestionBTN.verifEtatBTN()
         for i in [1,2,3,4,5,6,7,8,9,10,11,12]:
@@ -272,7 +274,9 @@ class ArreraDoc :
             if etatBTN[i] == "0":
                 nbBTN = str(i)
                 break
+        self.mainAffichage(1)
         self.gestionBTN.AjoutBTN(nbBTN,"file")
+
     
     def supprDoc(self):#Fonction de suppression des doc
         listBTNUse = []
@@ -307,11 +311,8 @@ class ArreraDoc :
                 self.btnDoc[i].image_names = image
                 type = self.gestionBTN.recuperationType(nb)
                 if type == "web":
-                    lien = self.gestionBTN.recuperationLien(nb)
-    
                     self.btnDoc[i].configure(image=image,command = self.actionBTNWeb[i].open)
                 else :
-                    
                     self.btnDoc[i].configure(image=image,command= self.actionBTNFile[i].open)
             else :
                 self.btnDoc[i].configure(image=self.imgDefault,command=self.noDoc)
