@@ -6,7 +6,6 @@ from objet.ObjetJSON import *
 class CommandWeb :
     def __init__(self,nb : str):
         self.fichierJSON = jsonWork("racourcie/configBTN/btnDoc"+nb+".json")
-        print("racourcie/btnDoc"+nb+".json")
     
     def open(self):
         lien = str(self.fichierJSON.lectureJSON("lien"))
