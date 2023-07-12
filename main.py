@@ -79,7 +79,7 @@ class ArreraDoc :
         #Fin de la boucle
         self.screen.mainloop()
     
-    def Apropop(self):
+    def Apropop(self):#Fonction fenetre a propos
         #Variable
         tailleIMG = (100,100)
         #Creation de la fenetre
@@ -106,13 +106,18 @@ class ArreraDoc :
         labelCopyright.pack()
         
     def mainAffichage(self,nb):
+        #Desafisage de tou les carde
         self.settingCadre.place_forget()
         self.addCadre.place_forget()
         self.supprCadre.place_forget()
+        #Affichage du cadre principale
         self.mainCadre.place(relx=0.5, rely=0.5, anchor=CENTER)
+        #Recuperation du nombre de bouton de l'interface
         nbRacoucie=int(self.configuration.lectureJSON("nbRacoucie"))
+        #Protection contre les modification du fichier 
         if nbRacoucie !=12 and nbRacoucie !=4 and nbRacoucie !=8:
             self.configuration.EcritureJSON("nbRacoucie","4")
+        #Affichage des bouton btnDoc
         if nbRacoucie == 12 :
             self.btnDoc[8].place(x=35,y=35)
             self.btnDoc[9].place(x=577,y=35)
@@ -142,13 +147,18 @@ class ArreraDoc :
                     self.btnDoc[1].place(x=185,y=194)
                     self.btnDoc[2].place(x=427,y=194)
                     self.btnDoc[3].place(x=577,y=194)
+        #Remise de Parametre au lieu de aceuil dans le menu superieur
         if nb == 1 :
             self.topMenu.entryconfigure("Accueil",label="Parametre",command=self.setting)
 
     def setting(self):
+        #Desafichage du cadre principale
         self.mainCadre.place_forget()
+        #Changement du menu supperieur
         self.topMenu.entryconfigure("Parametre",label="Accueil",command=lambda   : self.mainAffichage(1))
+        #Affichage du cadte de parametre
         self.settingCadre.place(relx=0.5, rely=0.5, anchor=CENTER)
+        #Affichage des widget
         self.labelIndication1.place(x="0",y="15")
         self.labelIndication2.place(x="195",y="75")
         nb = int(self.configuration.lectureJSON("nbRacoucie"))
@@ -173,10 +183,13 @@ class ArreraDoc :
         self.btnSuppr.place(x="200",y="255")
     
     def ecriturePara(self):
+        #Recuperation des valeur
         nb=str(self.varNbApp.get())
         color = str(self.varColor.get())
+        #ecriture des valeur
         self.configuration.EcritureJSON("nbRacoucie",nb)
         self.configuration.EcritureJSON("theme",color)
+        #Definition de la couleur des texte
         if color == "black":
             textColor = "white"
         else :
@@ -204,22 +217,14 @@ class ArreraDoc :
             self.btnDoc[i].place_forget()
         self.mainAffichage(1)
     
-    def addPage(self):
+    def addPage(self):#Fonction d'ajout de doc
         self.settingCadre.place_forget()
         self.addCadre.place(relx=0.5, rely=0.5, anchor=CENTER)
         self.btnOnline.place(x="50",y="194")
         self.btnLocal.place(x="547",y="194")
     
-    def textEntryLien(self,event):
-        if self.entryLien.get() == "Entrer le lien de la documentation":
-            self.entryLien.delete(0, END)
     
-    def textEntryName1(self,event):
-        if self.entryName1.get() == "Entrez le nom de la doc":
-            self.entryName1.delete(0, END)
-            self.entryName1.config(foreground="black")
-    
-    def onlineAdd(self):
+    def onlineAdd(self):#Fonction pour les doc en ligne
         etatBTN = self.gestionBTN.verifEtatBTN()
         for i in [1,2,3,4,5,6,7,8,9,10,11,12]:
             i = str(i)
@@ -228,7 +233,7 @@ class ArreraDoc :
                 break
         self.gestionBTN.AjoutBTN(nbBTN,"web")           
     
-    def localAdd(self):
+    def localAdd(self):#Fonction pour les doc local
         etatBTN = self.gestionBTN.verifEtatBTN()
         for i in [1,2,3,4,5,6,7,8,9,10,11,12]:
             i = str(i)
@@ -237,7 +242,7 @@ class ArreraDoc :
                 break
         self.gestionBTN.AjoutBTN(nbBTN,"file")
     
-    def supprDoc(self):
+    def supprDoc(self):#Fonction de suppression des doc
         listBTNUse = []
         for cles, valeur in self.gestionBTN.verifEtatBTN().items():
             if valeur == "1":
