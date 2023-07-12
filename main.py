@@ -2,7 +2,7 @@ from tkinter import*
 from PIL import Image, ImageTk
 from objet.ObjetJSON import *
 from objet.AddDoc import *
-import webbrowser
+from objet.commandBTN import*
 
 nameApp = "Arrera Documentation"
 versionApp = "I2023-1.00.dev07/2023"
@@ -12,9 +12,39 @@ class ArreraDoc :
     def __init__(self) :
         #Creation de la fenêtre
         self.screen = Tk()
-        #Initialisation du fichier JSON et AddDoc
+        #Initialisation du fichier JSON , AddDoc et commandBTN
         self.configuration = jsonWork("config.json")
         self.gestionBTN = AddDoc()
+        self.actionBTNWeb = [
+            CommandWeb("1"),
+            CommandWeb("2"),
+            CommandWeb("3"),
+            CommandWeb("4"),
+            CommandWeb("5"),
+            CommandWeb("6"),
+            CommandWeb("7"),
+            CommandWeb("8"),
+            CommandWeb("9"),
+            CommandWeb("10"),
+            CommandWeb("11"),
+            CommandWeb("12")
+        ]
+        self.actionBTNFile = [
+            CommandFile("1"),
+            CommandFile("2"),
+            CommandFile("3"),
+            CommandFile("4"),
+            CommandFile("5"),
+            CommandFile("6"),
+            CommandFile("7"),
+            CommandFile("8"),
+            CommandFile("9"),
+            CommandFile("10"),
+            CommandFile("11"),
+            CommandFile("12")
+        ]
+        #Image
+        self.imgDefault = PhotoImage(file="image/imgDefault.png")
         #varriable
         color = self.configuration.lectureJSON("theme")
         if color == "black":
@@ -45,18 +75,18 @@ class ArreraDoc :
         self.supprCadre = Frame(self.screen,bg=color,width=650,height=450)
         #Widget mainCadre
         self.btnDoc = [
-            Button(self.mainCadre,width="4",height="2",bg=color),
-            Button(self.mainCadre,width="4",height="2",bg=color),
-            Button(self.mainCadre,width="4",height="2",bg=color),
-            Button(self.mainCadre,width="4",height="2",bg=color),
-            Button(self.mainCadre,width="4",height="2",bg=color),
-            Button(self.mainCadre,width="4",height="2",bg=color),
-            Button(self.mainCadre,width="4",height="2",bg=color),
-            Button(self.mainCadre,width="4",height="2",bg=color),
-            Button(self.mainCadre,width="4",height="2",bg=color),
-            Button(self.mainCadre,width="4",height="2",bg=color),
-            Button(self.mainCadre,width="4",height="2",bg=color),
-            Button(self.mainCadre,width="4",height="2",bg=color)
+            Button(self.mainCadre),
+            Button(self.mainCadre),
+            Button(self.mainCadre),
+            Button(self.mainCadre),
+            Button(self.mainCadre),
+            Button(self.mainCadre),
+            Button(self.mainCadre),
+            Button(self.mainCadre),
+            Button(self.mainCadre),
+            Button(self.mainCadre),
+            Button(self.mainCadre),
+            Button(self.mainCadre)
         ]#Liste de bouton pour simplifier la gestion
         #widget settingCadre
         self.labelIndication1 = Label(self.settingCadre,text="Nombre de documentation afficher :",bg=color,font=("arial","20"),fg=textColor)
@@ -106,6 +136,8 @@ class ArreraDoc :
         labelCopyright.pack()
         
     def mainAffichage(self,nb):
+        #Mise en page des bouton 
+        self.actulisation()
         #Desafisage de tou les carde
         self.settingCadre.place_forget()
         self.addCadre.place_forget()
@@ -261,5 +293,26 @@ class ArreraDoc :
             self.listeBTN.place(x="440",y="15")
             self.btnValSuppr.configure(command=suppr)
             self.btnValSuppr.place(x="200",y="135")
-   
+    
+    def noDoc(self):
+        messagebox.showwarning("Attention", "Vous n'avez pas rajouter de documentation sur ce bouton")
+    
+    def actulisation(self):
+        etatBTN = self.gestionBTN.verifEtatBTN()
+        for i in [0,1,2,3,4,5,6,7,8,9,10,11]:
+            nb = str(i+1)
+            if etatBTN[nb] == "1" :
+                emplacementIMG = "racourcie/img/imgBTN"+nb+".png"
+                image = PhotoImage(file=emplacementIMG,master=self.btnDoc[i])
+                self.btnDoc[i].image_names = image
+                type = self.gestionBTN.recuperationType(nb)
+                if type == "web":
+                    lien = self.gestionBTN.recuperationLien(nb)
+    
+                    self.btnDoc[i].configure(image=image,command = self.actionBTNWeb[i].open)
+                else :
+                    
+                    self.btnDoc[i].configure(image=image,command= self.actionBTNFile[i].open)
+            else :
+                self.btnDoc[i].configure(image=self.imgDefault,command=self.noDoc)
 ArreraDoc()
