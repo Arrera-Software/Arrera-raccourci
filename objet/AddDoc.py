@@ -124,6 +124,6 @@ class AddDoc :
         var = jsonWork("racourcie/configBTN/btnDoc"+str(nbBTN)+"json").lectureJSON("type")
         return  var
     
-    def recuperationType(self,nbBTN):
+    def recuperationLien(self,nbBTN):
         return jsonWork("racourcie/configBTN/btnDoc"+str(nbBTN)+"json").lectureJSON("lien")
     
