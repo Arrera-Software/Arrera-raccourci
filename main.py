@@ -268,8 +268,9 @@ class ArreraDoc :
             i = str(i)
             if etatBTN[i] == "0":
                 nbBTN = str(i)
-                break  
-        self.gestionBTN.AjoutBTN(nbBTN,"web")
+                self.gestionBTN.AjoutBTN(nbBTN,"web")
+                break
+        
                
     def localAdd(self):#Fonction pour les doc local
         etatBTN = self.gestionBTN.verifEtatBTN()
@@ -277,8 +278,9 @@ class ArreraDoc :
             i = str(i)
             if etatBTN[i] == "0":
                 nbBTN = str(i)
+                self.gestionBTN.AjoutBTN(nbBTN,"file")
                 break
-        self.gestionBTN.AjoutBTN(nbBTN,"file")
+        
         
     def supprDoc(self):#Fonction de suppression des doc
         listBTNUse = []
