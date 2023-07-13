@@ -12,7 +12,7 @@ class ArreraDoc :
     def __init__(self) :
         #Creation de la fenêtre
         self.screen = Tk()
-        #Initialisation du fichier JSON , AddDoc et commandBTN
+        #Initialisation du fichier JSON , AddDoc ,commandBTN et openPDF
         self.configuration = jsonWork("config.json")
         self.gestionBTN = AddDoc()
         self.actionBTNWeb = [
@@ -43,6 +43,7 @@ class ArreraDoc :
             CommandFile("11"),
             CommandFile("12")
         ]
+        documentionArreraDoc = openPDF("documentation/ArreraDocumentation-Documentation.pdf")
         #Image
         self.imgDefault = PhotoImage(file="image/imgDefault.png")
         #varriable
@@ -66,7 +67,7 @@ class ArreraDoc :
         self.topMenu = Menu(self.screen)
         self.topMenu.add_command(label="Parametre",command=self.setting)
         self.topMenu.add_command(label="Logiciel Arrera")
-        self.topMenu.add_command(label="aide")
+        self.topMenu.add_command(label="aide",command=documentionArreraDoc.open)
         self.topMenu.add_command(label="A propos",command=self.Apropop)
         #Creation des cadre
         self.mainCadre = Frame(self.screen,bg=color,width=650,height=450)
