@@ -256,30 +256,45 @@ class ArreraDoc :
     
     def addPage(self):#Fonction d'ajout de doc
         self.settingCadre.place_forget()
-        self.addCadre.place(relx=0.5, rely=0.5, anchor=CENTER)
-        self.btnBack2.place(relx=0.5, rely=0.5, anchor=CENTER)
-        self.btnOnline.place(x="50",y="205")
-        self.btnLocal.place(x="547",y="205")
+        nbBTNLibre = self.gestionBTN.verifNbBTNLibre()
+        if nbBTNLibre > 0 :
+            self.addCadre.place(relx=0.5, rely=0.5, anchor=CENTER)
+            self.btnBack2.place(relx=0.5, rely=0.5, anchor=CENTER)
+            self.btnOnline.place(x="50",y="205")
+            self.btnLocal.place(x="547",y="205")
+        else :
+            self.mainAffichage(1) 
+            messagebox.showwarning("Attention", "Vous avez attient le nombre maximal de documentation que vous pouvez rajoutez") 
     
     
     def onlineAdd(self):#Fonction pour les doc en ligne
-        etatBTN = self.gestionBTN.verifEtatBTN()
-        for i in [1,2,3,4,5,6,7,8,9,10,11,12]:
-            i = str(i)
-            if etatBTN[i] == "0":
-                nbBTN = str(i)
-                self.gestionBTN.AjoutBTN(nbBTN,"web")
-                break
+        nbBTNLibre = self.gestionBTN.verifNbBTNLibre()
+        if nbBTNLibre > 0 :
+            etatBTN = self.gestionBTN.verifEtatBTN()
+            for i in [1,2,3,4,5,6,7,8,9,10,11,12]:
+                i = str(i)
+                if etatBTN[i] == "0":
+                    nbBTN = str(i)
+                    self.gestionBTN.AjoutBTN(nbBTN,"web")
+                    break
+        else :
+            self.mainAffichage(1) 
+            messagebox.showwarning("Attention", "Vous avez attient le nombre maximal de documentation que vous pouvez rajoutez")
         
                
     def localAdd(self):#Fonction pour les doc local
-        etatBTN = self.gestionBTN.verifEtatBTN()
-        for i in [1,2,3,4,5,6,7,8,9,10,11,12]:
-            i = str(i)
-            if etatBTN[i] == "0":
-                nbBTN = str(i)
-                self.gestionBTN.AjoutBTN(nbBTN,"file")
-                break
+        nbBTNLibre = self.gestionBTN.verifNbBTNLibre()
+        if nbBTNLibre > 0 :
+            etatBTN = self.gestionBTN.verifEtatBTN()
+            for i in [1,2,3,4,5,6,7,8,9,10,11,12]:
+                i = str(i)
+                if etatBTN[i] == "0":
+                    nbBTN = str(i)
+                    self.gestionBTN.AjoutBTN(nbBTN,"file")
+                    break
+        else :
+            self.mainAffichage(1) 
+            messagebox.showwarning("Attention", "Vous avez attient le nombre maximal de documentation que vous pouvez rajoutez")
         
         
     def supprDoc(self):#Fonction de suppression des doc

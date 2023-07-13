@@ -22,4 +22,10 @@ class jsonWork :
         openfile.close()
         writeFile = open(self.fichier, 'w', encoding='utf-8')
         dict[flag] = valeur
-        json.dump(dict,writeFile,indent=2)      
+        json.dump(dict,writeFile,indent=2)  
+         
+    def lectureSimpleJSON(self):#Permet de juste recuperer le contenu d'un fichier JSON
+        with open(self.fichier, 'r') as openfile:
+            dictionnaire = json.load(openfile)
+        return dict(dictionnaire)
+    

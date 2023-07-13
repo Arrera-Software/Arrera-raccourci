@@ -95,6 +95,14 @@ class AddDoc :
             return True
         else :
             return False
+    
+    def verifNbBTNLibre(self):
+        compteur = 0
+        dictionnaire = self.etatBTN.lectureSimpleJSON()
+        for valeur in dictionnaire.values():
+            if valeur == "0":
+                compteur += 1
+        return compteur
             
     def supprBTN(self,nbBTN):
         nbBTN = str(nbBTN)
