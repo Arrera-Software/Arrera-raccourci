@@ -96,9 +96,11 @@ class ArreraDoc :
         self.btnValider = Button(self.settingCadre,text="Valider",font=("arial","15"),width="25",bg="green",fg="white",command=self.ecriturePara)
         self.btnAdd = Button(self.settingCadre,text="Ajouter une documentation",font=("arial","15"),width="25",bg=color,fg=textColor,command=self.addPage)
         self.btnSuppr = Button(self.settingCadre,text="Supprimer une documentation",font=("arial","15"),width="25",bg=color,fg=textColor,command=self.supprDoc)
+        self.btnBack1 = Button(self.settingCadre,text="Retour Acceuil",bg=color,fg=textColor,font=("arial","15"),width="25",command= lambda : self.mainAffichage(1))
         #widget addCadre
         self.btnOnline = Button(self.addCadre,text="En ligne",bg=color,fg=textColor,font=("arial","15"),command=self.onlineAdd)
         self.btnLocal = Button(self.addCadre,text="Local",bg=color,fg=textColor,font=("arial","15"),command=self.localAdd)
+        self.btnBack2 = Button(self.addCadre,text="Retour Acceuil",bg=color,fg=textColor,font=("arial","15"),command= lambda : self.mainAffichage(1))
         #widget supprCadre
         self.labelIndication3 = Label(self.supprCadre,text="Choisissez le numero du bouton :",bg=color,font=("arial","20"),fg=textColor)
         self.btnValSuppr = Button(self.supprCadre,text="Supprimer",font=("arial","15"),width="25",bg="red",fg="white")
@@ -213,6 +215,7 @@ class ArreraDoc :
         self.btnValider.place(x="200",y="135")
         self.btnAdd.place(x="200",y="195")
         self.btnSuppr.place(x="200",y="255")
+        self.btnBack1.place(x="200",y="315")
     
     def ecriturePara(self):
         #Recuperation des valeur
@@ -239,6 +242,8 @@ class ArreraDoc :
         self.btnOnline.configure(bg=color,fg=textColor)
         self.btnLocal.configure(bg=color,fg=textColor)
         self.btnSuppr.configure(bg=color,fg=textColor)
+        self.btnBack1.configure(bg=color,fg=textColor)
+        self.btnBack2.configure(bg=color,fg=textColor)
         #gestion des label
         self.labelIndication1.configure(bg=color,fg=textColor)
         self.labelIndication2.configure(bg=color,fg=textColor)
@@ -252,8 +257,9 @@ class ArreraDoc :
     def addPage(self):#Fonction d'ajout de doc
         self.settingCadre.place_forget()
         self.addCadre.place(relx=0.5, rely=0.5, anchor=CENTER)
-        self.btnOnline.place(x="50",y="194")
-        self.btnLocal.place(x="547",y="194")
+        self.btnBack2.place(relx=0.5, rely=0.5, anchor=CENTER)
+        self.btnOnline.place(x="50",y="205")
+        self.btnLocal.place(x="547",y="205")
     
     
     def onlineAdd(self):#Fonction pour les doc en ligne
@@ -262,11 +268,9 @@ class ArreraDoc :
             i = str(i)
             if etatBTN[i] == "0":
                 nbBTN = str(i)
-                break
-        self.mainAffichage(1)          
+                break  
         self.gestionBTN.AjoutBTN(nbBTN,"web")
-        
-        
+               
     def localAdd(self):#Fonction pour les doc local
         etatBTN = self.gestionBTN.verifEtatBTN()
         for i in [1,2,3,4,5,6,7,8,9,10,11,12]:
@@ -274,10 +278,8 @@ class ArreraDoc :
             if etatBTN[i] == "0":
                 nbBTN = str(i)
                 break
-        self.mainAffichage(1)
         self.gestionBTN.AjoutBTN(nbBTN,"file")
-
-    
+        
     def supprDoc(self):#Fonction de suppression des doc
         listBTNUse = []
         for cles, valeur in self.gestionBTN.verifEtatBTN().items():
