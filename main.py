@@ -43,7 +43,9 @@ class ArreraDoc :
             CommandFile("11"),
             CommandFile("12")
         ]
+        #Documentation
         documentionArreraDoc = openPDF("documentation/ArreraDocumentation-Documentation.pdf")
+        documentionRyley = openPDF("racourcie/fichier/ryley.pdf")
         #Image
         self.imgDefault = PhotoImage(file="image/imgDefault.png")
         #varriable
@@ -66,7 +68,7 @@ class ArreraDoc :
         #Creation du menu 
         self.topMenu = Menu(self.screen)
         self.topMenu.add_command(label="Parametre",command=self.setting)
-        self.topMenu.add_command(label="Logiciel Arrera")
+        self.topMenu.add_command(label="Logiciel Arrera",command=lambda : self.arreraDoc(0))
         self.topMenu.add_command(label="aide",command=documentionArreraDoc.open)
         self.topMenu.add_command(label="A propos",command=self.Apropop)
         #Creation des cadre
@@ -74,20 +76,21 @@ class ArreraDoc :
         self.settingCadre = Frame(self.screen,bg=color,width=650,height=450)
         self.addCadre = Frame(self.screen,bg=color,width=650,height=450)
         self.supprCadre = Frame(self.screen,bg=color,width=650,height=450)
+        self.arreraDocCadre = Frame(self.screen,bg=color,width=650,height=450)
         #Widget mainCadre
         self.btnDoc = [
-            Button(self.mainCadre),
-            Button(self.mainCadre),
-            Button(self.mainCadre),
-            Button(self.mainCadre),
-            Button(self.mainCadre),
-            Button(self.mainCadre),
-            Button(self.mainCadre),
-            Button(self.mainCadre),
-            Button(self.mainCadre),
-            Button(self.mainCadre),
-            Button(self.mainCadre),
-            Button(self.mainCadre)
+            Button(self.mainCadre,bg=color),
+            Button(self.mainCadre,bg=color),
+            Button(self.mainCadre,bg=color),
+            Button(self.mainCadre,bg=color),
+            Button(self.mainCadre,bg=color),
+            Button(self.mainCadre,bg=color),
+            Button(self.mainCadre,bg=color),
+            Button(self.mainCadre,bg=color),
+            Button(self.mainCadre,bg=color),
+            Button(self.mainCadre,bg=color),
+            Button(self.mainCadre,bg=color),
+            Button(self.mainCadre,bg=color)
         ]#Liste de bouton pour simplifier la gestion
         #widget settingCadre
         self.labelIndication1 = Label(self.settingCadre,text="Nombre de documentation afficher :",bg=color,font=("arial","20"),fg=textColor)
@@ -105,6 +108,28 @@ class ArreraDoc :
         #widget supprCadre
         self.labelIndication3 = Label(self.supprCadre,text="Choisissez le numero du bouton :",bg=color,font=("arial","20"),fg=textColor)
         self.btnValSuppr = Button(self.supprCadre,text="Supprimer",font=("arial","15"),width="25",bg="red",fg="white")
+        #widget arreraDocCadre
+        self.btnArreraDoc = [
+            Button(self.arreraDocCadre,bg=color,command=documentionRyley.open),#Bouton ryley
+            Button(self.arreraDocCadre,bg=color),#Bouton Six
+            Button(self.arreraDocCadre,bg=color),#Bouton Arrera Video Download
+            Button(self.arreraDocCadre,bg=color),#Bouton Arrera Interface
+            Button(self.arreraDocCadre,bg=color),#Bouton arrera info
+            Button(self.arreraDocCadre,bg=color)#Bouton arrera copilote
+        ]
+        #Image btnArreraDoc
+        self.imgArreraDoc = [
+            PhotoImage(file="racourcie/img/ryley.png",master=self.btnArreraDoc[0]),
+            PhotoImage(file="racourcie/img/six.png",master=self.btnArreraDoc[1]),
+            PhotoImage(file="racourcie/img/arreraVideoDownload.png",master=self.btnArreraDoc[2]),
+            PhotoImage(file="racourcie/img/arreraInterface.png",master=self.btnArreraDoc[3]),
+            PhotoImage(file="racourcie/img/arreraInfo.png",master=self.btnArreraDoc[4]),
+            PhotoImage(file="racourcie/img/arreraCopilote.png",master=self.btnArreraDoc[5])
+        ]
+        #Application de image
+        for i in [0,1,2,3,4,5]:
+            self.btnArreraDoc[i].image_names = self.imgArreraDoc[i]
+            self.btnArreraDoc[i].configure(image=self.imgArreraDoc[i])
         #Affichage  
         self.mainAffichage(0)
         #Ajout de menu a la fenetre
@@ -145,6 +170,7 @@ class ArreraDoc :
         self.settingCadre.place_forget()
         self.addCadre.place_forget()
         self.supprCadre.place_forget()
+        self.arreraDocCadre.place_forget()
         #Affichage du cadre principale
         self.mainCadre.place(relx=0.5, rely=0.5, anchor=CENTER)
         #Recuperation du nombre de bouton de l'interface
@@ -185,12 +211,14 @@ class ArreraDoc :
         #Remise de Parametre au lieu de aceuil dans le menu superieur
         if nb == 1 :
             self.topMenu.entryconfigure("Accueil",label="Parametre",command=self.setting)
+            self.topMenu.entryconfigure("Logiciel Arrera",label="Logiciel Arrera",command=lambda : self.arreraDoc(0))
 
     def setting(self):
         #Desafichage du cadre principale
         self.mainCadre.place_forget()
         #Changement du menu supperieur
         self.topMenu.entryconfigure("Parametre",label="Accueil",command=lambda   : self.mainAffichage(1))
+        self.topMenu.entryconfigure("Logiciel Arrera",label="Logiciel Arrera",command=lambda : self.arreraDoc(1))
         #Affichage du cadte de parametre
         self.settingCadre.place(relx=0.5, rely=0.5, anchor=CENTER)
         #Affichage des widget
@@ -236,9 +264,10 @@ class ArreraDoc :
         self.mainCadre.configure(bg=color)
         self.settingCadre.configure(bg=color)
         self.addCadre.configure(bg=color)
+        self.arreraDocCadre.configure(bg=color)
         #Gestion de la couleur des bouton
         for i in [0,1,2,3,4,5,6,7,8,9,10,11] :
-            self.btnDoc[i].configure(bg=color,fg=textColor)
+            self.btnDoc[i].configure(bg=color)
         self.btnAdd.configure(bg=color,fg=textColor)
         self.btnOnline.configure(bg=color,fg=textColor)
         self.btnLocal.configure(bg=color,fg=textColor)
@@ -336,4 +365,25 @@ class ArreraDoc :
                     self.btnDoc[i].configure(image=image,command= self.actionBTNFile[i].open)
             else :
                 self.btnDoc[i].configure(image=self.imgDefault,command=self.noDoc)
+    
+    def arreraDoc(self,para:int):
+        #Desafisage des cadre
+        self.settingCadre.place_forget()
+        self.addCadre.place_forget()
+        self.supprCadre.place_forget()
+        self.mainCadre.place_forget()
+        #Affichage du cadre principale
+        self.arreraDocCadre.place(relx=0.5, rely=0.5, anchor=CENTER)
+        #Changement du bouton du menu
+        self.topMenu.entryconfigure("Logiciel Arrera",label="Logiciel Arrera",command=lambda : self.arreraDoc(1))
+        if para == 0:
+            self.topMenu.entryconfigure("Parametre",label="Accueil",command=lambda   : self.mainAffichage(1))
+        #Affichage widget
+        self.btnArreraDoc[0].place(x=5,y=194)
+        self.btnArreraDoc[1].place(x=105,y=194)
+        self.btnArreraDoc[2].place(x=205,y=194)
+        self.btnArreraDoc[3].place(x=395,y=194)
+        self.btnArreraDoc[4].place(x=495,y=194)
+        self.btnArreraDoc[5].place(x=595,y=194)
+        
 ArreraDoc()
