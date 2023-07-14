@@ -5,7 +5,7 @@ from objet.AddDoc import *
 from objet.commandBTN import*
 
 nameApp = "Arrera Documentation"
-versionApp = "I2023-1.00.dev07/2023"
+versionApp = "I2023-1.00"
 imagePath = "image/icon.png"
 copyrightApp = "Copyright Arrera Software by Baptiste P 2023-"
 class ArreraDoc :
