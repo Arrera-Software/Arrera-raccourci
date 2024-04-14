@@ -5,9 +5,9 @@ from objet.AddDoc import *
 from objet.commandBTN import*
 
 nameApp = "Arrera Documentation"
-versionApp = "I2023-1.00.dev07/2023"
+versionApp = "I2024-1.5.dev02/2024"
 imagePath = "image/icon.png"
-copyrightApp = "Copyright Arrera Software by Baptiste P 2023-"
+copyrightApp = "Copyright Arrera Software by Baptiste P 2023-2024"
 class ArreraDoc :
     def __init__(self) :
         #Creation de la fenêtre
@@ -295,7 +295,6 @@ class ArreraDoc :
             self.mainAffichage(1) 
             messagebox.showwarning("Attention", "Vous avez attient le nombre maximal de documentation que vous pouvez rajoutez") 
     
-    
     def onlineAdd(self):#Fonction pour les doc en ligne
         nbBTNLibre = self.gestionBTN.verifNbBTNLibre()
         if nbBTNLibre > 0 :
@@ -309,8 +308,7 @@ class ArreraDoc :
         else :
             self.mainAffichage(1) 
             messagebox.showwarning("Attention", "Vous avez attient le nombre maximal de documentation que vous pouvez rajoutez")
-        
-               
+                   
     def localAdd(self):#Fonction pour les doc local
         nbBTNLibre = self.gestionBTN.verifNbBTNLibre()
         if nbBTNLibre > 0 :
@@ -324,7 +322,6 @@ class ArreraDoc :
         else :
             self.mainAffichage(1) 
             messagebox.showwarning("Attention", "Vous avez attient le nombre maximal de documentation que vous pouvez rajoutez")
-        
         
     def supprDoc(self):#Fonction de suppression des doc
         listBTNUse = []
