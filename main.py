@@ -109,11 +109,11 @@ class ArreraDoc :
         self.btnValSuppr = Button(self.supprCadre,text="Supprimer",font=("arial","15"),width="25",bg="red",fg="white")
         #widget arreraDocCadre
         self.btnArreraDoc = [
-            Button(self.arreraDocCadre,bg=color,command=documentionRyley.open),#Bouton ryley
-            Button(self.arreraDocCadre,bg=color),#Bouton Six
-            Button(self.arreraDocCadre,bg=color),#Bouton Arrera Video Download
-            Button(self.arreraDocCadre,bg=color),#Bouton Arrera Interface
-            Button(self.arreraDocCadre,bg=color),#Bouton arrera info
+            Button(self.arreraDocCadre,bg=color,command=lambda : webbrowser.open("https://github.com/Arrera-Software/Ryley/wiki")),#Bouton ryley
+            Button(self.arreraDocCadre,bg=color,command=lambda: webbrowser.open("https://github.com/Arrera-Software/Six/wiki")),#Bouton Six
+            Button(self.arreraDocCadre,bg=color,command=lambda: webbrowser.open("https://github.com/Arrera-Software/Arrera-VideoDownload/wiki")),#Bouton Arrera Video Download
+            Button(self.arreraDocCadre,bg=color,command=lambda:webbrowser.open("https://github.com/Arrera-Software/Arrera-Interface/wiki")),#Bouton Arrera Interface
+            Button(self.arreraDocCadre,bg=color,command=lambda:webbrowser.open("https://github.com/Arrera-Software/Arrera-Info/wiki")),#Bouton arrera info
             Button(self.arreraDocCadre,bg=color)#Bouton arrera copilote
         ]
         #Image btnArreraDoc
@@ -383,6 +383,6 @@ class ArreraDoc :
         self.btnArreraDoc[2].place(x=205,y=194)
         self.btnArreraDoc[3].place(x=395,y=194)
         self.btnArreraDoc[4].place(x=495,y=194)
-        self.btnArreraDoc[5].place(x=595,y=194)
+        #self.btnArreraDoc[5].place(x=595,y=194)
         
 ArreraDoc()
