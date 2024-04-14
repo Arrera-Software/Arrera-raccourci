@@ -44,7 +44,6 @@ class ArreraDoc :
             CommandFile("12")
         ]
         #Documentation
-        documentionArreraDoc = openPDF("documentation/ArreraDocumentation-Documentation.pdf")
         documentionRyley = openPDF("racourcie/fichier/ryley.pdf")
         #Image
         self.imgDefault = PhotoImage(file="image/imgDefault.png")
@@ -69,7 +68,7 @@ class ArreraDoc :
         self.topMenu = Menu(self.screen)
         self.topMenu.add_command(label="Parametre",command=self.setting)
         self.topMenu.add_command(label="Logiciel Arrera",command=lambda : self.arreraDoc(0))
-        self.topMenu.add_command(label="aide",command=documentionArreraDoc.open)
+        self.topMenu.add_command(label="aide",command=lambda : webbrowser.open("https://github.com/Arrera-Software/Arrera-Documentation/blob/main/README.md"))
         self.topMenu.add_command(label="A propos",command=self.Apropop)
         #Creation des cadre
         self.mainCadre = Frame(self.screen,bg=color,width=650,height=450)
