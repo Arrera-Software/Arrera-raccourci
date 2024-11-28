@@ -4,10 +4,11 @@ from objet.ObjetJSON import *
 from objet.AddDoc import *
 from objet.commandBTN import*
 
-nameApp = "Arrera Documentation"
+nameApp = "Arrera Racourcie"
 versionApp = "I2024-1.5.dev02/2024"
 imagePath = "image/icon.png"
 copyrightApp = "Copyright Arrera Software by Baptiste P 2023-2024"
+
 class ArreraDoc :
     def __init__(self) :
         #Creation de la fenêtre
@@ -65,9 +66,9 @@ class ArreraDoc :
         self.screen.config(bg=color)
         self.screen.minsize(700,500)
         #Creation du menu 
-        self.topMenu = Menu(self.screen)
+        self.topMenu = Menu(self.screen,bg=color,fg=textColor)
         self.topMenu.add_command(label="Parametre",command=self.setting)
-        self.topMenu.add_command(label="Logiciel Arrera",command=lambda : self.arreraDoc(0))
+        #self.topMenu.add_command(label="Logiciel Arrera",command=lambda : self.arreraDoc(0))
         self.topMenu.add_command(label="aide",command=lambda : webbrowser.open("https://github.com/Arrera-Software/Arrera-Documentation/blob/main/README.md"))
         self.topMenu.add_command(label="A propos",command=self.Apropop)
         #Creation des cadre
@@ -210,14 +211,14 @@ class ArreraDoc :
         #Remise de Parametre au lieu de aceuil dans le menu superieur
         if nb == 1 :
             self.topMenu.entryconfigure("Accueil",label="Parametre",command=self.setting)
-            self.topMenu.entryconfigure("Logiciel Arrera",label="Logiciel Arrera",command=lambda : self.arreraDoc(0))
+            #self.topMenu.entryconfigure("Logiciel Arrera",label="Logiciel Arrera",command=lambda : self.arreraDoc(0))
 
     def setting(self):
         #Desafichage du cadre principale
         self.mainCadre.place_forget()
         #Changement du menu supperieur
         self.topMenu.entryconfigure("Parametre",label="Accueil",command=lambda   : self.mainAffichage(1))
-        self.topMenu.entryconfigure("Logiciel Arrera",label="Logiciel Arrera",command=lambda : self.arreraDoc(1))
+        #self.topMenu.entryconfigure("Logiciel Arrera",label="Logiciel Arrera",command=lambda : self.arreraDoc(1))
         #Affichage du cadte de parametre
         self.settingCadre.place(relx=0.5, rely=0.5, anchor=CENTER)
         #Affichage des widget
@@ -259,6 +260,7 @@ class ArreraDoc :
             textColor="black"
         #Gestion de la fenetre   
         self.screen.configure(bg=color)
+        self.topMenu.configure(bg=color,fg=textColor)
         #Gestion de la couleur des cadre
         self.mainCadre.configure(bg=color)
         self.settingCadre.configure(bg=color)
