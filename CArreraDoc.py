@@ -94,29 +94,29 @@ class CArreraDoc:
             Button(self.__mainCadre, bg=color)
         ]  # Liste de bouton pour simplifier la gestion
         # widget settingCadre
-        self.__labelIndication1 = Label(self.__settingCadre, text="Nombre de documentation afficher :", bg=color,
+        self.__labelIndication1 = Label(self.__settingCadre, text="Nombre de raccourcis affichés : ", bg=color,
                                       font=("arial", "20"), fg=textColor)
-        self.__labelIndication2 = Label(self.__settingCadre, text="Theme application :", bg=color, font=("arial", "20"),
+        self.__labelIndication2 = Label(self.__settingCadre, text="Thème application : ", bg=color, font=("arial", "20"),
                                       fg=textColor)
         self.__menuColor = OptionMenu(self.__settingCadre, self.__varColor, *self.__listeColor)
         self.__menuApp = OptionMenu(self.__settingCadre, self.__varNbApp, *self.__listNb)
         self.__btnValider = Button(self.__settingCadre, text="Valider", font=("arial", "15"), width="25", bg="green",
                                  fg="white", command=self.__ecriturePara)
-        self.__btnAdd = Button(self.__settingCadre, text="Ajouter une documentation", font=("arial", "15"), width="25",
+        self.__btnAdd = Button(self.__settingCadre, text="Ajouter un raccourci", font=("arial", "15"), width="25",
                              bg=color, fg=textColor, command=self.__addPage)
-        self.__btnSuppr = Button(self.__settingCadre, text="Supprimer une documentation", font=("arial", "15"), width="25",
+        self.__btnSuppr = Button(self.__settingCadre, text="Supprimer un raccourci", font=("arial", "15"), width="25",
                                bg=color, fg=textColor, command=self.__supprDoc)
-        self.__btnBack1 = Button(self.__settingCadre, text="Retour Acceuil", bg=color, fg=textColor, font=("arial", "15"),
+        self.__btnBack1 = Button(self.__settingCadre, text="Retour Accueil", bg=color, fg=textColor, font=("arial", "15"),
                                width="25", command=lambda: self.__mainAffichage(1))
         # widget addCadre
         self.__btnOnline = Button(self.__addCadre, text="En ligne", bg=color, fg=textColor, font=("arial", "15"),
                                 command=self.__onlineAdd)
         self.__btnLocal = Button(self.__addCadre, text="Local", bg=color, fg=textColor, font=("arial", "15"),
                                command=self.__localAdd)
-        self.__btnBack2 = Button(self.__addCadre, text="Retour Acceuil", bg=color, fg=textColor, font=("arial", "15"),
+        self.__btnBack2 = Button(self.__addCadre, text="Retour Accueil", bg=color, fg=textColor, font=("arial", "15"),
                                command=lambda: self.__mainAffichage(1))
         # widget supprCadre
-        self.__labelIndication3 = Label(self.__supprCadre, text="Choisissez le numero du bouton :", bg=color,
+        self.__labelIndication3 = Label(self.__supprCadre, text="Choisissez le numéro du bouton :", bg=color,
                                       font=("arial", "20"), fg=textColor)
         self.__btnValSuppr = Button(self.__supprCadre, text="Supprimer", font=("arial", "15"), width="25", bg="red",
                                   fg="white")
@@ -285,7 +285,7 @@ class CArreraDoc:
         else:
             self.__mainAffichage(1)
             messagebox.showwarning("Attention",
-                                   "Vous avez attient le nombre maximal de documentation que vous pouvez rajoutez")
+                                   "Vous avez atteint le nombre maximal de raccourcis que vous pouvez rajouter.")
 
     def __onlineAdd(self):  # Fonction pour les doc en ligne
         nbBTNLibre = self.__gestionBTN.verifNbBTNLibre()
@@ -300,7 +300,7 @@ class CArreraDoc:
         else:
             self.__mainAffichage(1)
             messagebox.showwarning("Attention",
-                                   "Vous avez attient le nombre maximal de documentation que vous pouvez rajoutez")
+                                   "Vous avez atteint le nombre maximal de raccourcis que vous pouvez rajouter.")
 
     def __localAdd(self):  # Fonction pour les doc local
         nbBTNLibre = self.__gestionBTN.verifNbBTNLibre()
@@ -315,7 +315,7 @@ class CArreraDoc:
         else:
             self.__mainAffichage(1)
             messagebox.showwarning("Attention",
-                                   "Vous avez attient le nombre maximal de documentation que vous pouvez rajoutez")
+                                   "Vous avez attient le nombre maximal de raccourci que vous pouvez rajoutez")
 
     def __supprDoc(self):  # Fonction de suppression des doc
         listBTNUse = []
@@ -324,7 +324,7 @@ class CArreraDoc:
                 listBTNUse.append(str(cles))
         if listBTNUse == []:
             messagebox.showwarning("Attention",
-                                   "Vous avez pas supprimer de documentation si vous nous avez pas ajouter")
+                                   "Vous avez pas supprimer de raccourci si vous nous avez pas ajouter")
         else:
             self.listeBTN = OptionMenu(self.__supprCadre, self.__varBTN, *listBTNUse)
 
@@ -341,7 +341,7 @@ class CArreraDoc:
             self.__btnValSuppr.place(x="200", y="135")
 
     def __noDoc(self):
-        messagebox.showwarning("Attention", "Vous n'avez pas rajouter de documentation sur ce bouton")
+        messagebox.showwarning("Attention", "Vous n'avez pas rajouter de raccourci sur ce bouton")
 
     def __actulisation(self):
         etatBTN = self.__gestionBTN.verifEtatBTN()
