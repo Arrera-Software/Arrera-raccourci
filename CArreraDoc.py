@@ -47,7 +47,7 @@ class CArreraDoc:
         # Creation de la fenêtre
         self.__screen = Tk()
         # Image
-        self.__imgDefault = PhotoImage(file="image/imgDefault.png")
+        self.__imgDefault = PhotoImage(file="racourcie/img/imgDefault.png")
         # varriable
         color = self.__configuration.lectureJSON("theme")
         if color == "black":
