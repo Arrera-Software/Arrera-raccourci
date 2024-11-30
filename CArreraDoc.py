@@ -5,7 +5,7 @@ from objet.AddDoc import *
 from objet.commandBTN import*
 
 NAMEAPP = "Arrera Raccourci"
-VERSIONAPP = "I2024-1.5.dev02/2024"
+VERSIONAPP = "I2024-1.5.dev11/2024"
 IMAGEPATH = "image/icon.png"
 COPYRIGHTAPP = "Copyright Arrera Software by Baptiste P 2023-2024"
 
