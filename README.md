@@ -31,3 +31,7 @@ Interface avec 12 boutons :
  
 Les paramètres permettent de modifier la couleur de l'interface de blanc à noir, de rajouter et supprimer
 des documentations sur les boutons, et de définir le nombre de boutons affichés (4, 8 ou 12).
+
+### Explication des paramètres :
+
+![Descriptif interface](https://github.com/Arrera-Software/Arrera-Documentation/blob/main/documentation/5.png)
