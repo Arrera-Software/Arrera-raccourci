@@ -103,9 +103,9 @@ class CArreraDoc:
         self.__btnValider = Button(self.__settingCadre, text="Valider", font=("arial", "15"), width="25", bg="green",
                                  fg="white", command=self.__ecriturePara)
         self.__btnAdd = Button(self.__settingCadre, text="Ajouter un raccourci", font=("arial", "15"), width="25",
-                             bg=color, fg=textColor, command=self.__addPage)
+                             bg=color, fg=textColor, command= lambda : self.__addPage())
         self.__btnSuppr = Button(self.__settingCadre, text="Supprimer un raccourci", font=("arial", "15"), width="25",
-                               bg=color, fg=textColor, command=self.__supprDoc)
+                               bg=color, fg=textColor, command=lambda : self.__supprDoc())
         self.__btnBack1 = Button(self.__settingCadre, text="Retour Accueil", bg=color, fg=textColor, font=("arial", "15"),
                                width="25", command=lambda: self.__mainAffichage(1))
         # widget addCadre

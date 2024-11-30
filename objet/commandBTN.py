@@ -1,6 +1,8 @@
 import webbrowser
-from objet.openPDF import*
+import subprocess
 from objet.ObjetJSON import *
+from objet.detectionOS import *
+import os
 
 class CommandWeb :
     def __init__(self,nb : str):
@@ -12,10 +14,15 @@ class CommandWeb :
         
 class CommandFile : 
     def __init__(self,nb : str) :
-        self.pdf = openPDF("racourcie/fichier/doc"+nb+".pdf")
+        os = OS()
+        self.__linuxOS = os.osLinux()
+        self.__windowsOS = os.osWindows()
+        del os
+        self.__fileJson = jsonWork("racourcie/configBTN/btnDoc"+nb+".json")
+
     
     def open(self):
-       self.pdf.open()
-    
-   
-        
+        if ((self.__linuxOS == True) and (self.__windowsOS == False)):
+            subprocess.run(['xdg-open', self.__fileJson.lectureJSON("lien")], check=True)
+        elif ((self.__linuxOS == False) and (self.__windowsOS == True)):
+            os.startfile(self.__fileJson.lectureJSON("lien"))

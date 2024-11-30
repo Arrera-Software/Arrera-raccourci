@@ -59,20 +59,39 @@ class AddDoc :
             #Ajout des doc
             if typeLien == "file" :#Si file
                 #Fentre d'avertisement
-                messagebox.showwarning("Attention", "Dans la fenêtre suivante, veuillez sélectionner une documentation au format pdf")
+                messagebox.showwarning("Attention",
+                                       "Dans la fenêtre suivante, veuillez sélectionner le fichier pour créer un raccourci.")
                 #Recuperation du fichier
-                source = askopenfilename(defaultextension=".png", filetypes=[("Image", ".pdf")])
-                #Copie
-                shutil.copy2(source,"racourcie/fichier")
-                #Renomage
-                newFileName = os.path.join("racourcie/fichier","doc"+nbBTN+".pdf")
-                os.rename(os.path.join("racourcie/fichier", os.path.basename(source)),newFileName)
-                #Enregistrement dans le fichier json du type
-                fichierBTN.EcritureJSON("type","file")
-                self.modifEtatBTN(nbBTN,True)
+                source = askopenfilename(defaultextension=".pdf",
+                                         filetypes=
+                                         [("PDF Files", "*.pdf"),
+                                          ("Word Documents", "*.docx *.odt"),
+                                          ("PowerPoint Presentations", "*.pptx *.odp"),
+                                          ("Excel Spreadsheets", "*.xlsx *.ods")])
+                # Renomage
+                file_extension = os.path.splitext(source)[1]
+                if source.endswith(".pdf"):
+                    file_type = "pdf"
+                elif source.endswith(".docx") or source.endswith(".odt"):
+                    file_type = "docx"
+                elif source.endswith(".pptx") or source.endswith(".odp"):
+                    file_type = "pptx"
+                elif source.endswith(".xlsx") or source.endswith(".ods"):
+                    file_type = "xlsx"
+                else :
+                    file_type = "other"
+
+                if file_extension == "other":
+                    messagebox.showerror("Erreur","Le fichier n'est pas supporter")
+                    return False
+                else :
+                    fichierBTN.EcritureJSON("lien", source)
+                    fichierBTN.EcritureJSON("type", file_type)
+                    self.modifEtatBTN(nbBTN,True)
             else :#Si web
                 #Fentre d'avertisement
-                messagebox.showwarning("Attention", "Dans la fenêtre suivante, veuillez entrer le lien internet de la documentation")
+                messagebox.showwarning("Attention",
+                                       "Dans la fenêtre suivante, veuillez entrer le lien internet pour créer un raccourci.")
                 #Creation fenetre de recuperation
                 screen = Tk()
                 screen.title("Ajout lien")
